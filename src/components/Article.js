@@ -8,7 +8,7 @@ export default ({ article }) => {
       <span className="post-meta">
         {article["createdAt"]}, {article["source"]}
       </span>
-      <a href={article["url"]}>
+      <a href={article["url"]} target="_blank">
         <h2 className="post-link">{article["title"]}</h2>
         <p className="post-description">{article["content"]}</p>
       </a>

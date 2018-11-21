@@ -1,0 +1,38 @@
+@import "../scss/variables";
+
+.main-banner {
+  .item {
+    background-size: cover;
+  }
+
+  .item0 {
+    background: url("../img/banner/bg-01.jpg") no-repeat center;
+  }
+
+  .item1 {
+    background: url("../img/banner/bg-02.jpg") no-repeat center;
+  }
+
+  .item2 {
+    background: url("../img/banner/bg-03.jpg") no-repeat center;
+  }
+
+  .content {
+    color: #fff;
+    margin: 0 auto;
+    max-width: $container-width;
+    letter-spacing: -1.3px;
+  }
+  span {
+    margin-top: 63px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 26px;
+  }
+  .body {
+    margin: 6px 0 30px;
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 63px;
+  }
+}

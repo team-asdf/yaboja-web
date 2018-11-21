@@ -4,6 +4,8 @@ import qwest from "qwest";
 import Article from "./Article";
 import { AuthConsumer } from "../contexts/AuthContext";
 
+import "./ArticleList.scss";
+
 function guid() {
   function s4() {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -77,7 +79,11 @@ class ArticleList extends Component {
   }
 
   render() {
-    const loader = <div key={guid()}>Loading...</div>;
+    const loader = (
+      <div key={guid()} className="loading-bar">
+        Loading...
+      </div>
+    );
 
     var items = [];
     this.state.articles.map((article, i) =>
