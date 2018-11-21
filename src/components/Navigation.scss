@@ -1,0 +1,81 @@
+@import "../scss/variables";
+@import "../scss/util";
+@import "../scss/base";
+
+.site-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: #fff;
+  border-bottom: 1px solid #eeeeee;
+  transition: all 0.3s;
+  z-index: 1;
+  padding: 0.5em 35px 0.5em 35px;
+  .site-title {
+    span {
+      font-weight: 550;
+      font-size: 21px;
+    }
+    float: left;
+    i {
+      display: inline-block;
+      width: 110px;
+      background: #fff url("../img/yaboja-name.svg") no-repeat center;
+      background-size: 90px auto;
+    }
+    // hack! https://codepen.io/edge0703/pen/iHJuA
+    i:before {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+    }
+  }
+  .site-nav {
+    float: right;
+    font-size: 1.25em;
+    a {
+      padding: 0 0.5em;
+    }
+    a:active,
+    a:hover {
+      cursor: pointer;
+      text-decoration: none;
+      border-bottom: 2px solid $gray;
+    }
+    a.active {
+      border-bottom: 2px solid $red;
+    }
+    a + a {
+    }
+
+    .profile-image {
+      @include lg {
+        margin-left: 9px;
+        border-radius: 50%;
+        float: right;
+        height: 48px;
+      }
+      @include sm {
+        display: none;
+      }
+    }
+  }
+  .site-title,
+  .site-nav {
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    @include sm {
+      float: none;
+      text-align: center;
+    }
+  }
+  @include sm {
+    margin: 0.25em;
+    padding: 0.25em;
+  }
+}

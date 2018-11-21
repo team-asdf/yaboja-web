@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthConsumer } from "./AuthContext";
+import { PATH } from "../consts/consts";
 
 const ProtectedRoute = ({
   initialized,
@@ -10,7 +11,11 @@ const ProtectedRoute = ({
 }) => (
   <Route
     render={props =>
-      initialized === init ? <Component {...props} /> : <Redirect to="/" />
+      initialized === init ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to={PATH.HOME} />
+      )
     }
     {...rest}
   />

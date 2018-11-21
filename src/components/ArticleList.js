@@ -25,6 +25,7 @@ function guid() {
 class ArticleList extends Component {
   state = {
     inizialized: false,
+    index: 0,
     profile: undefined,
     articles: []
   };
@@ -32,13 +33,11 @@ class ArticleList extends Component {
   componentDidMount() {
     this.setState({
       initialized: this.props.initialized,
-      index: 0,
       profile: this.props.profile,
       articles: []
     });
 
     this._getArticles();
-    this.setState(({ index }) => ({ index: index + 1 }));
   }
 
   _getArticles = async () => {
@@ -49,7 +48,13 @@ class ArticleList extends Component {
   };
 
   _callApi = () => {
-    return fetch("http://angelbeats.tk:3000/api/v1/get_contents/1")
+    const { index } = this.state;
+
+    this.setState({ index: index + 1 });
+
+    return fetch(
+      process.env.REACT_APP_API_HOST + "/get_contents/" + String(index)
+    )
       .then(response => response.json())
       .catch(err => console.log(err));
   };
