@@ -3,7 +3,6 @@ import React from "react";
 import "./Article.scss";
 
 export default ({ article }) => {
-  console.log(article);
   return (
     <div className="list-module">
       <span className="post-meta">

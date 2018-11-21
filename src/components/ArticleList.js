@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import InfiniteScroll from "react-infinite-scroller";
+import qwest from "qwest";
 import Article from "./Article";
 import { AuthConsumer } from "../contexts/AuthContext";
 
@@ -23,63 +25,79 @@ function guid() {
 }
 
 class ArticleList extends Component {
-  state = {
-    inizialized: false,
-    index: 1,
-    refresh: false,
-    profile: undefined,
-    articles: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      inizialized: false,
+      profile: undefined,
+      articles: [],
+      hasMoreItems: true,
+      nextHref: null
+    };
+  }
 
   componentDidMount() {
     this.setState({
       initialized: this.props.initialized,
       profile: this.props.profile
     });
-
-    this._getArticles();
   }
 
-  _getArticles = async () => {
-    const articles = await this._callApi(this.state.index);
+  loadArticles(page) {
+    var self = this;
 
-    this.setState({
-      articles: [...this.state.articles, ...articles],
-      refresh: true,
-      index: this.state.index + 1
-    });
-  };
+    var url = this.state.nextHref
+      ? this.state.nextHref
+      : process.env.REACT_APP_API_HOST + "/get_contents/" + String(page);
 
-  _callApi = () => {
-    const { index } = this.state;
+    qwest
+      .get(
+        url,
+        {
+          linked_partitioning: 1,
+          page_size: 10
+        },
+        { cache: true }
+      )
+      .then(response => JSON.parse(response["response"]))
+      .then(response => {
+        var articles = self.state.articles;
 
-    return fetch(
-      process.env.REACT_APP_API_HOST + "/get_contents/" + String(index)
-    )
-      .then(response => response.json())
-      .catch(err => console.log(err));
-  };
+        response.map(resp => {
+          resp["idx"] = guid();
+          articles.push(resp);
+        });
+
+        self.setState({
+          articles,
+          nextHref:
+            process.env.REACT_APP_API_HOST + "/get_contents/" + String(page)
+        });
+      });
+  }
 
   render() {
-    const { articles } = this.state;
+    const loader = <div key={guid()}>Loading...</div>;
 
-    let body = "Loading";
+    var items = [];
+    this.state.articles.map((article, i) =>
+      items.push(<Article key={String(guid())} article={article} />)
+    );
 
-    if (this.state.refresh) {
-      body = (
+    return (
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={this.loadArticles.bind(this)}
+        hasMore={this.state.hasMoreItems}
+        loader={loader}
+      >
         <div className="site-wrapper" role="main">
           <div className="container">
-            <div className="post-list">
-              {articles.map(article => {
-                return <Article key={String(guid())} article={article} />;
-              })}
-            </div>
+            <div className="post-list">{items}</div>
           </div>
         </div>
-      );
-    }
-
-    return body;
+      </InfiniteScroll>
+    );
   }
 }
 
@@ -92,39 +110,3 @@ const ArticleListContainer = () => (
 );
 
 export default ArticleListContainer;
-
-// export default () => {
-//   return (
-//     <div>
-//       {({ articles, update }) => (
-//         <div key={String(guid())}>
-//           <button
-//             onClick={e => {
-//               e.preventDefault();
-//               update();
-//             }}
-//           >
-//             update
-//           </button>
-//           {articles.map((article, idx) => {
-//             const {
-//               title,
-//               content,
-//               keyword: keywords,
-//               source,
-//               url,
-//               createdAt
-//             } = article;
-
-//             return (
-//               <Article
-//                 key={String(guid())}
-//                 value={{ title, content, keywords, source, url, createdAt }}
-//               />
-//             );
-//           })}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
