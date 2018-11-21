@@ -25,7 +25,8 @@ function guid() {
 class ArticleList extends Component {
   state = {
     inizialized: false,
-    index: 0,
+    index: 1,
+    refresh: false,
     profile: undefined,
     articles: []
   };
@@ -33,8 +34,7 @@ class ArticleList extends Component {
   componentDidMount() {
     this.setState({
       initialized: this.props.initialized,
-      profile: this.props.profile,
-      articles: []
+      profile: this.props.profile
     });
 
     this._getArticles();
@@ -42,15 +42,16 @@ class ArticleList extends Component {
 
   _getArticles = async () => {
     const articles = await this._callApi(this.state.index);
+
     this.setState({
-      articles: [...this.state.articles, articles]
+      articles: [...this.state.articles, ...articles],
+      refresh: true,
+      index: this.state.index + 1
     });
   };
 
   _callApi = () => {
     const { index } = this.state;
-
-    this.setState({ index: index + 1 });
 
     return fetch(
       process.env.REACT_APP_API_HOST + "/get_contents/" + String(index)
@@ -60,7 +61,25 @@ class ArticleList extends Component {
   };
 
   render() {
-    return <div>article</div>;
+    const { articles } = this.state;
+
+    let body = "Loading";
+
+    if (this.state.refresh) {
+      body = (
+        <div className="site-wrapper" role="main">
+          <div className="container">
+            <div className="post-list">
+              {articles.map(article => {
+                return <Article key={String(guid())} article={article} />;
+              })}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return body;
   }
 }
 
