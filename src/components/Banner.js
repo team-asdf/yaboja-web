@@ -9,7 +9,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const styles = {
   root: {
     position: "relative",
-    marginTop: "0"
+    marginTop: 70
   },
   slide: {
     paddingTop: 65,

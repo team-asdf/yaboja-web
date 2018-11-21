@@ -20,7 +20,8 @@
   .content {
     color: #fff;
     margin: 0 auto;
-    max-width: $container-width;
+    padding: 0 20px;
+    max-width: $container-width - 70px;
     letter-spacing: -1.3px;
   }
   span {
