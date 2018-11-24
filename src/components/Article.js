@@ -5,16 +5,20 @@ import "./Article.scss";
 export default ({ article }) => {
   return (
     <div className="list-module">
-      <span className="post-meta">
-        {article["createdAt"]}, {article["source"]}
-      </span>
-      <a href={article["url"]} target="_blank">
+      <div className="desc">
+        <p className="pf">
+          <span className="ic-left">
+            #{article["source"]} / {article["createdAt"]}
+          </span>
+        </p>
+      </div>
+      <a href={article["url"]} target="_blank" rel="noopener noreferrer">
         <h2 className="post-link">{article["title"]}</h2>
         <p className="post-description">{article["content"]}</p>
       </a>
       <ul className="post-tag">
         {article["keyword"].split(",").map(k => (
-          <li key={String(article["idx"] + k)}>{k}</li>
+          <li key={String(article["idx"] + k)}>{"# " + k.replace(" ", "_")}</li>
         ))}
       </ul>
     </div>

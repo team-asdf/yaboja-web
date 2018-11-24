@@ -10,10 +10,12 @@ import "./Navigation.scss";
 const NavigationBar = ({ initialized, profile, logout }) => (
   <header className="site-header" id="scroll-navbar">
     <div className="container">
-      <div className="site-title">
-        <i />
-        <span>똑똑하게 야보자</span>
-      </div>
+      <Link to={PATH.HOME}>
+        <div className="site-title">
+          <i />
+          <span>똑똑하게 야보자</span>
+        </div>
+      </Link>
 
       <nav className="site-nav">
         {initialized ? (

@@ -1,30 +1,12 @@
 import React, { Component } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import qwest from "qwest";
+import { v1 } from "uuid";
 import Article from "./Article";
-import { AuthConsumer } from "../contexts/AuthContext";
-
 import "./ArticleList.scss";
 
-function guid() {
-  function s4() {
-    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-  }
-  return (
-    s4() +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    s4() +
-    s4()
-  );
-}
+import { AuthConsumer } from "../contexts/AuthContext";
+import { api } from "../consts/apis";
 
 class ArticleList extends Component {
   constructor(props) {
@@ -46,11 +28,7 @@ class ArticleList extends Component {
   }
 
   loadArticles(page) {
-    var self = this;
-
-    var url = this.state.nextHref
-      ? this.state.nextHref
-      : process.env.REACT_APP_API_HOST + "/get_contents/" + String(page);
+    var url = this.state.nextHref ? this.state.nextHref : api.getArticle(page);
 
     qwest
       .get(
@@ -63,31 +41,35 @@ class ArticleList extends Component {
       )
       .then(response => JSON.parse(response["response"]))
       .then(response => {
-        var articles = self.state.articles;
+        var articles = this.state.articles;
 
         response.map(resp => {
-          resp["idx"] = guid();
+          resp["idx"] = v1();
           articles.push(resp);
+          return resp;
         });
 
-        self.setState({
-          articles,
-          nextHref:
-            process.env.REACT_APP_API_HOST + "/get_contents/" + String(page)
-        });
+        if (response.length === 0) {
+          this.setState({ hasMoreItems: false });
+        } else {
+          this.setState({
+            articles,
+            nextHref: api.getArticle(page)
+          });
+        }
       });
   }
 
   render() {
     const loader = (
-      <div key={guid()} className="loading-bar">
+      <div key={v1()} className="loading-bar">
         Loading...
       </div>
     );
 
     var items = [];
-    this.state.articles.map((article, i) =>
-      items.push(<Article key={String(guid())} article={article} />)
+    this.state.articles.map(article =>
+      items.push(<Article key={String(v1())} article={article} />)
     );
 
     return (

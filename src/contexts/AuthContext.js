@@ -1,14 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
+import { api } from "../consts/apis";
+import qwest from "qwest";
 
 const AuthContext = React.createContext();
-
 const { Provider, Consumer: AuthConsumer } = AuthContext;
 
-class AuthProvider extends React.Component {
+class AuthProvider extends Component {
   state = { initialized: false, profile: undefined };
 
   actions = {
-    login: () => {
+    login: username => {
+      const url = api.IS_GITHUB_ID_CHECKER;
+      console.log(url);
       setTimeout(
         () =>
           this.setState({
@@ -60,6 +63,9 @@ class AuthProvider extends React.Component {
           }),
         1
       );
+
+      console.log(this.state.initialized);
+      return true;
     },
 
     logout: () => {

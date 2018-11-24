@@ -3,6 +3,12 @@
 @import "../scss/base";
 
 .site-header {
+  transition: all 0.25s;
+  &:hover {
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
   position: fixed;
   top: 0;
   right: 0;
@@ -70,8 +76,8 @@
     line-height: 50px;
     vertical-align: middle;
     @include sm {
-      float: none;
-      text-align: center;
+      // float: none;
+      // text-align: center;
     }
   }
   // @include sm {

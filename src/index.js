@@ -5,7 +5,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 
 import { Home, Setting, Login, About } from "./pages";
 
-import { NavigationBar } from "./components";
+import { NavigationBar, Footer } from "./components";
 import ProtectedRoute from "./contexts/ProtectedRoute";
 
 import { PATH } from "./consts/consts";
@@ -18,13 +18,16 @@ const App = () => (
       <AuthProvider>
         <NavigationBar />
         <Switch>
-          <ProtectedRoute path={PATH.SETTING} component={Setting} />
-          <ProtectedRoute path={PATH.ABOUT} component={About} />
+          {/* <ProtectedRoute path={PATH.SETTING} component={Setting} /> */}
+
+          <Route path={PATH.SETTING} component={Setting} />
+          <Route path={PATH.ABOUT} component={About} />
           <ProtectedRoute path={PATH.LOGIN} init={false} component={Login} />
           <Route path={PATH.HOME} component={Home} />
         </Switch>
       </AuthProvider>
     </Router>
+    <Footer />
   </div>
 );
 
