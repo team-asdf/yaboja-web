@@ -1,15 +1,15 @@
 {
-  "main.css": "/yaboja/static/css/main.9e7b3604.chunk.css",
-  "main.js": "/yaboja/static/js/main.74233c6c.chunk.js",
-  "main.js.map": "/yaboja/static/js/main.74233c6c.chunk.js.map",
-  "static/js/1.b5f33cd6.chunk.js": "/yaboja/static/js/1.b5f33cd6.chunk.js",
-  "static/js/1.b5f33cd6.chunk.js.map": "/yaboja/static/js/1.b5f33cd6.chunk.js.map",
-  "runtime~main.js": "/yaboja/static/js/runtime~main.8c1a9530.js",
-  "runtime~main.js.map": "/yaboja/static/js/runtime~main.8c1a9530.js.map",
-  "static/media/Banner.scss": "/yaboja/static/media/bg-03.e914bc02.jpg",
-  "static/media/main.scss": "/yaboja/static/media/yaboja_pattern.9e8302ad.png",
-  "static/css/main.9e7b3604.chunk.css.map": "/yaboja/static/css/main.9e7b3604.chunk.css.map",
-  "index.html": "/yaboja/index.html",
-  "precache-manifest.720778b1b9c0f10ea37d5fdc28998230.js": "/yaboja/precache-manifest.720778b1b9c0f10ea37d5fdc28998230.js",
-  "service-worker.js": "/yaboja/service-worker.js"
+  "main.css": "/yaboja-web/static/css/main.db61cca6.chunk.css",
+  "main.js": "/yaboja-web/static/js/main.7e998a8e.chunk.js",
+  "main.js.map": "/yaboja-web/static/js/main.7e998a8e.chunk.js.map",
+  "static/js/1.b5f33cd6.chunk.js": "/yaboja-web/static/js/1.b5f33cd6.chunk.js",
+  "static/js/1.b5f33cd6.chunk.js.map": "/yaboja-web/static/js/1.b5f33cd6.chunk.js.map",
+  "runtime~main.js": "/yaboja-web/static/js/runtime~main.a48809f3.js",
+  "runtime~main.js.map": "/yaboja-web/static/js/runtime~main.a48809f3.js.map",
+  "static/media/Banner.scss": "/yaboja-web/static/media/bg-03.e914bc02.jpg",
+  "static/media/main.scss": "/yaboja-web/static/media/yaboja_pattern.9e8302ad.png",
+  "static/css/main.db61cca6.chunk.css.map": "/yaboja-web/static/css/main.db61cca6.chunk.css.map",
+  "index.html": "/yaboja-web/index.html",
+  "precache-manifest.3281bf40c8f32829050602ee810f39bd.js": "/yaboja-web/precache-manifest.3281bf40c8f32829050602ee810f39bd.js",
+  "service-worker.js": "/yaboja-web/service-worker.js"
 }
