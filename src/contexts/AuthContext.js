@@ -16,12 +16,18 @@ class AuthProvider extends Component {
   state = { initialized: false, verified: STATUS.WAIT, profile: undefined };
 
   actions = {
+    select: () => {
+      console.log(1);
+      // SUCCESS -> VERIFY
+      this.setState({ verified: STATUS.VERIFY });
+    },
     login: () => {
-      this.setState({ initialized: true, verified: STATUS.VERIFY });
+      // LOGIN
+      this.setState({ initialized: true });
     },
     verify: username => {
+      // WAIT -> {FAIL, SUCCESS}
       const url = api.IS_GITHUB_ID_CHECKER;
-      console.log(url, username);
 
       this.setState({ verified: STATUS.SUCCESS });
 
@@ -111,6 +117,7 @@ function useProvider(WrappedComponent) {
             initialized={state.initialized}
             profile={state.profile}
             verified={state.verified}
+            select={actions.select}
             login={actions.login}
             logout={actions.logout}
           />

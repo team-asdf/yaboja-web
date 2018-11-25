@@ -14,6 +14,7 @@ class Login extends Component {
     this.handleOnVerify = this.handleOnVerify.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnLogin = this.handleOnLogin.bind(this);
+    this.handleOnSelect = this.handleOnSelect.bind(this);
   }
 
   handleOnChange(e) {
@@ -31,30 +32,47 @@ class Login extends Component {
     this.props.login();
   }
 
+  handleOnSelect(e) {
+    console.log(1);
+    e.preventDefault();
+    this.props.select();
+  }
+
   render() {
     const { initialized, verified } = this.props;
 
     let body = "";
     let arg =
-      verified === STATUS.SUCCESS
+      verified === STATUS.WAIT || verified === STATUS.FAIL
         ? {
-            onSubmit: this.handleOnLogin,
-            text: "시작하기",
-            btn: "btn-key"
-          }
-        : {
             onSubmit: this.handleOnVerify,
+            profile: verified === STATUS.FAIL ? "틀림!" : "",
             text: "입력",
             btn: "btn-sub"
-          };
-    arg["profile"] =
-      verified === STATUS.WAIT ? (
-        ""
-      ) : verified === STATUS.SUCCESS ? (
-        <Profile data={this.props.profile} />
-      ) : (
-        "없는아이디"
-      );
+          }
+        : verified === STATUS.SUCCESS
+          ? {
+              onSubmit: this.handleOnVerify,
+              profile: (
+                <Profile
+                  data={this.props.profile}
+                  onClick={this.handleOnSelect}
+                />
+              ),
+              text: "선택해주세요",
+              btn: "btn-sub"
+            }
+          : {
+              onSubmit: this.handleOnLogin,
+              profile: (
+                <Profile
+                  data={this.props.profile}
+                  onClick={this.handleOnSelect}
+                />
+              ),
+              text: "시작하기",
+              btn: "btn-key"
+            };
 
     body = initialized ? (
       <Redirect to="/setting" />
@@ -82,8 +100,8 @@ class Login extends Component {
                     className=""
                   />
                 </div>
+                <div className="input-group">{arg.profile}</div>
               </div>
-              {arg.profile}
             </div>
             <div className="row submit">
               <button className={"btn " + arg.btn} type="submit">
@@ -109,6 +127,7 @@ const LoginContainer = () => (
         profile={state.profile}
         login={actions.login}
         verify={actions.verify}
+        select={actions.select}
       />
     )}
   </AuthConsumer>

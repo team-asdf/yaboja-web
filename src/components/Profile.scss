@@ -3,8 +3,12 @@
 
   transition: all 0.25s;
   &:hover {
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .select-profile {
+    border: 1px solid #ff3478 !important;
   }
 }
 
@@ -14,6 +18,7 @@
   //   margin: 0 8px 8px;
   border: 1px solid #f1f2f3;
 }
+
 .profile-img,
 .teacher-introduce {
   display: inline-block;
