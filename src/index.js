@@ -14,7 +14,7 @@ import "./scss/main.scss";
 
 const App = () => (
   <div className="site default-layout">
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <AuthProvider>
         <NavigationBar />
         <Switch>

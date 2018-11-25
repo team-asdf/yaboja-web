@@ -2,9 +2,23 @@ import React from "react";
 
 import "./Article.scss";
 
-export default ({ article, keyword, onClick }) => {
+export default ({ initialized, article, keyword, onClick, archiveClick }) => {
   return (
-    <div className="list-module" onClick={onClick}>
+    <div className="list-module">
+      {initialized ? (
+        <button
+          onClick={() => archiveClick(article["idx"])}
+          className={
+            article["archive"]
+              ? "btn btn-key archive"
+              : "btn btn-default archive"
+          }
+        >
+          <span>또보자</span>
+        </button>
+      ) : (
+        ""
+      )}
       <div className="desc">
         <p className="pf">
           <span className="ic-left">
@@ -12,7 +26,12 @@ export default ({ article, keyword, onClick }) => {
           </span>
         </p>
       </div>
-      <a href={article["url"]} target="_blank" rel="noopener noreferrer">
+      <a
+        onClick={onClick}
+        href={article["url"]}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <h2 className="post-link">{article["title"]}</h2>
         <p className="post-description">{article["content"]}</p>
       </a>
@@ -26,7 +45,7 @@ export default ({ article, keyword, onClick }) => {
               ? "tag-hightlight"
               : "";
           return (
-            <li key={String(article["idx"] + k)} className={highlight}>
+            <li key={String(article["uuid"] + k)} className={highlight}>
               {"# " + k.replace(" ", "_")}
             </li>
           );

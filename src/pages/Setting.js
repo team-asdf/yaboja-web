@@ -89,10 +89,10 @@ class Setting extends Component {
                   ""
                 )}
               </div>
-              <h1>kk</h1>
             </div>
+            <br />
             <div className="row submit">
-              <button className="btn btn-disabled" type="submit" disabled="">
+              <button className="btn btn-key" type="submit">
                 <span>저장하기</span>
               </button>
             </div>

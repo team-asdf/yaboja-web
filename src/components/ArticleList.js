@@ -18,11 +18,25 @@ class ArticleList extends Component {
     };
 
     this.clickArticle = this.clickArticle.bind(this);
+    this.archiveClick = this.archiveClick.bind(this);
   }
 
   clickArticle(e) {
-    e.preventDefault();
-    console.log(e.target);
+    console.log(e);
+    // TODO: count view
+  }
+
+  archiveClick(idx) {
+    // TODO: update archive
+    var temp = this.state.articles;
+    temp = temp.map(a => {
+      if (a["idx"] === idx) {
+        a["archive"] = !a["archive"];
+      }
+      return a;
+    });
+
+    this.setState({ archive: temp });
   }
 
   loadArticles(page) {
@@ -46,7 +60,8 @@ class ArticleList extends Component {
         var articles = this.state.articles;
 
         response.map(resp => {
-          resp["idx"] = v1();
+          resp["uuid"] = v1();
+          resp["archive"] = false;
           articles.push(resp);
           return resp;
         });
@@ -79,7 +94,9 @@ class ArticleList extends Component {
       items.push(
         <Article
           key={String(v1())}
+          initialized={initialized}
           onClick={this.clickArticle}
+          archiveClick={this.archiveClick}
           article={article}
           keyword={initialized ? profile["keyword"][0]["keyword"] : ""}
         />
