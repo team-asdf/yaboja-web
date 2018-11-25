@@ -2,9 +2,9 @@ import React from "react";
 
 import "./Article.scss";
 
-export default ({ article }) => {
+export default ({ article, keyword, onClick }) => {
   return (
-    <div className="list-module">
+    <div className="list-module" onClick={onClick}>
       <div className="desc">
         <p className="pf">
           <span className="ic-left">
@@ -17,9 +17,20 @@ export default ({ article }) => {
         <p className="post-description">{article["content"]}</p>
       </a>
       <ul className="post-tag">
-        {article["keyword"].split(",").map(k => (
-          <li key={String(article["idx"] + k)}>{"# " + k.replace(" ", "_")}</li>
-        ))}
+        {article["keyword"].split(",").map(k => {
+          const highlight =
+            keyword
+              .split(",")
+              .map(k => k.toLowerCase())
+              .indexOf(k.toLowerCase()) !== -1
+              ? "tag-hightlight"
+              : "";
+          return (
+            <li key={String(article["idx"] + k)} className={highlight}>
+              {"# " + k.replace(" ", "_")}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

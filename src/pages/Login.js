@@ -29,11 +29,10 @@ class Login extends Component {
 
   handleOnLogin(e) {
     e.preventDefault();
-    this.props.login();
+    this.props.login(this.state.username);
   }
 
   handleOnSelect(e) {
-    console.log(1);
     e.preventDefault();
     this.props.select();
   }

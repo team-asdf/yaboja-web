@@ -74,12 +74,18 @@ a {
     margin: 0;
     padding: 0;
 
+    li.tag-hightlight {
+      background-color: #f8266c;
+      border-color: #f81460;
+      color: #fff;
+    }
+
     li {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       margin-right: 8px;
-      color: #ff3478;
+      color: #a7aab2;
       float: left;
-      border: solid #ff3478 0.5px;
+      border: solid #a7aab2 0.5px;
       padding: 2px 3px;
       letter-spacing: -0.01rem;
       white-space: normal;

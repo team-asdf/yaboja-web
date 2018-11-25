@@ -11,15 +11,12 @@ class Profile extends Component {
 
   handleOnClick(e) {
     this.props.onClick(e);
-    console.log(1);
     this.setState(({ select }) => ({ select: !select }));
   }
 
   render() {
     const { data } = this.props;
     const { select } = this.state;
-
-    console.log(select);
 
     return (
       <div onClick={this.handleOnClick}>

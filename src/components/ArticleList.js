@@ -12,23 +12,25 @@ class ArticleList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inizialized: false,
-      profile: undefined,
       articles: [],
       hasMoreItems: true,
       nextHref: null
     };
+
+    this.clickArticle = this.clickArticle.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({
-      initialized: this.props.initialized,
-      profile: this.props.profile
-    });
+  clickArticle(e) {
+    e.preventDefault();
+    console.log(e.target);
   }
 
   loadArticles(page) {
-    var url = this.state.nextHref ? this.state.nextHref : api.getArticle(page);
+    const { initialized, profile } = this.props;
+
+    var url = this.state.nextHref
+      ? this.state.nextHref
+      : api.getArticle(page, initialized ? profile["login"] : undefined);
 
     qwest
       .get(
@@ -37,7 +39,7 @@ class ArticleList extends Component {
           linked_partitioning: 1,
           page_size: 10
         },
-        { cache: true }
+        { cache: false }
       )
       .then(response => JSON.parse(response["response"]))
       .then(response => {
@@ -54,13 +56,18 @@ class ArticleList extends Component {
         } else {
           this.setState({
             articles,
-            nextHref: api.getArticle(page)
+            nextHref: api.getArticle(
+              page,
+              initialized ? profile["login"] : undefined
+            )
           });
         }
       });
   }
 
   render() {
+    const { initialized, profile } = this.props;
+
     const loader = (
       <div key={v1()} className="loading-bar">
         Loading...
@@ -69,7 +76,14 @@ class ArticleList extends Component {
 
     var items = [];
     this.state.articles.map(article =>
-      items.push(<Article key={String(v1())} article={article} />)
+      items.push(
+        <Article
+          key={String(v1())}
+          onClick={this.clickArticle}
+          article={article}
+          keyword={initialized ? profile["keyword"][0]["keyword"] : ""}
+        />
+      )
     );
 
     return (

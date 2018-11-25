@@ -18,9 +18,9 @@ const App = () => (
       <AuthProvider>
         <NavigationBar />
         <Switch>
-          {/* <ProtectedRoute path={PATH.SETTING} component={Setting} /> */}
+          <ProtectedRoute path={PATH.SETTING} component={Setting} />
 
-          <Route path={PATH.SETTING} component={Setting} />
+          {/* <Route path={PATH.SETTING} component={Setting} /> */}
           <Route path={PATH.ABOUT} component={About} />
           <Route path={PATH.LOGIN} init={false} component={Login} />
           <Route path={PATH.HOME} component={Home} />
