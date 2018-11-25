@@ -1,15 +1,15 @@
 {
-  "main.css": "/yaboja-web/static/css/main.db61cca6.chunk.css",
-  "main.js": "/yaboja-web/static/js/main.7e998a8e.chunk.js",
-  "main.js.map": "/yaboja-web/static/js/main.7e998a8e.chunk.js.map",
-  "static/js/1.b5f33cd6.chunk.js": "/yaboja-web/static/js/1.b5f33cd6.chunk.js",
-  "static/js/1.b5f33cd6.chunk.js.map": "/yaboja-web/static/js/1.b5f33cd6.chunk.js.map",
-  "runtime~main.js": "/yaboja-web/static/js/runtime~main.a48809f3.js",
-  "runtime~main.js.map": "/yaboja-web/static/js/runtime~main.a48809f3.js.map",
-  "static/media/Banner.scss": "/yaboja-web/static/media/bg-03.e914bc02.jpg",
-  "static/media/main.scss": "/yaboja-web/static/media/yaboja_pattern.9e8302ad.png",
-  "static/css/main.db61cca6.chunk.css.map": "/yaboja-web/static/css/main.db61cca6.chunk.css.map",
-  "index.html": "/yaboja-web/index.html",
-  "precache-manifest.3281bf40c8f32829050602ee810f39bd.js": "/yaboja-web/precache-manifest.3281bf40c8f32829050602ee810f39bd.js",
-  "service-worker.js": "/yaboja-web/service-worker.js"
+  "main.css": "https://github.com/team-asdf/yaboja-web/static/css/main.7aa5f78b.chunk.css",
+  "main.js": "https://github.com/team-asdf/yaboja-web/static/js/main.e66d2491.chunk.js",
+  "main.js.map": "https://github.com/team-asdf/yaboja-web/static/js/main.e66d2491.chunk.js.map",
+  "static/js/1.b5f33cd6.chunk.js": "https://github.com/team-asdf/yaboja-web/static/js/1.b5f33cd6.chunk.js",
+  "static/js/1.b5f33cd6.chunk.js.map": "https://github.com/team-asdf/yaboja-web/static/js/1.b5f33cd6.chunk.js.map",
+  "runtime~main.js": "https://github.com/team-asdf/yaboja-web/static/js/runtime~main.657ce040.js",
+  "runtime~main.js.map": "https://github.com/team-asdf/yaboja-web/static/js/runtime~main.657ce040.js.map",
+  "static/media/Banner.scss": "https://github.com/team-asdf/yaboja-web/static/media/bg-03.e914bc02.jpg",
+  "static/media/main.scss": "https://github.com/team-asdf/yaboja-web/static/media/yaboja_pattern.9e8302ad.png",
+  "static/css/main.7aa5f78b.chunk.css.map": "https://github.com/team-asdf/yaboja-web/static/css/main.7aa5f78b.chunk.css.map",
+  "index.html": "https://github.com/team-asdf/yaboja-web/index.html",
+  "precache-manifest.5b29922156f81c8f35463c550d4eff55.js": "https://github.com/team-asdf/yaboja-web/precache-manifest.5b29922156f81c8f35463c550d4eff55.js",
+  "service-worker.js": "https://github.com/team-asdf/yaboja-web/service-worker.js"
 }

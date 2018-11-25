@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/yaboja-web/precache-manifest.3281bf40c8f32829050602ee810f39bd.js"
+  "https://github.com/team-asdf/yaboja-web/precache-manifest.5b29922156f81c8f35463c550d4eff55.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/yaboja-web/index.html", {
+workbox.routing.registerNavigationRoute("https://github.com/team-asdf/yaboja-web/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
