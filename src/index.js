@@ -22,7 +22,7 @@ const App = () => (
 
           <Route path={PATH.SETTING} component={Setting} />
           <Route path={PATH.ABOUT} component={About} />
-          <ProtectedRoute path={PATH.LOGIN} init={false} component={Login} />
+          <Route path={PATH.LOGIN} init={false} component={Login} />
           <Route path={PATH.HOME} component={Home} />
         </Switch>
       </AuthProvider>

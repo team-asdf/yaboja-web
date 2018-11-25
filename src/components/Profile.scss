@@ -1,0 +1,43 @@
+.cl-teacher {
+  margin: 5px 0px;
+
+  transition: all 0.25s;
+  &:hover {
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.teacher-about {
+  min-width: 300px;
+  padding: 16px 3px;
+  //   margin: 0 8px 8px;
+  border: 1px solid #f1f2f3;
+}
+.profile-img,
+.teacher-introduce {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.teacher-introduce {
+  max-width: 250px;
+  font-size: 0.8rem;
+}
+.name {
+  font-size: 1rem;
+  margin: 0 0 4px;
+  color: #000;
+}
+.description {
+  color: #898d96;
+}
+
+.profile-img {
+  width: 70px;
+  height: 70px;
+  margin-right: 16px;
+  border-radius: 50%;
+  background-size: cover;
+  background-color: #f1f2f3;
+}

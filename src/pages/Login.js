@@ -1,23 +1,19 @@
 import React, { Component } from "react";
-import { AuthConsumer } from "../contexts/AuthContext";
+import { AuthConsumer, STATUS } from "../contexts/AuthContext";
 import { Redirect } from "react-router-dom";
+import { Profile } from "../components";
 import "./Login.scss";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialized: false,
-      username: "",
-      log: ""
+      username: ""
     };
 
-    this.handleOnLogin = this.handleOnLogin.bind(this);
+    this.handleOnVerify = this.handleOnVerify.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({ initialized: this.props.initialized });
+    this.handleOnLogin = this.handleOnLogin.bind(this);
   }
 
   handleOnChange(e) {
@@ -25,23 +21,47 @@ class Login extends Component {
     this.setState({ username: e.target.value });
   }
 
+  handleOnVerify(e) {
+    e.preventDefault();
+    this.props.verify(this.state.username);
+  }
+
   handleOnLogin(e) {
     e.preventDefault();
-    this.props.login(this.state.username);
-    this.setState({ initialized: true });
+    this.props.login();
   }
 
   render() {
-    const { initialized } = this.state;
+    const { initialized, verified } = this.props;
 
     let body = "";
+    let arg =
+      verified === STATUS.SUCCESS
+        ? {
+            onSubmit: this.handleOnLogin,
+            text: "시작하기",
+            btn: "btn-key"
+          }
+        : {
+            onSubmit: this.handleOnVerify,
+            text: "입력",
+            btn: "btn-sub"
+          };
+    arg["profile"] =
+      verified === STATUS.WAIT ? (
+        ""
+      ) : verified === STATUS.SUCCESS ? (
+        <Profile data={this.props.profile} />
+      ) : (
+        "없는아이디"
+      );
 
     body = initialized ? (
       <Redirect to="/setting" />
     ) : (
       <section id="login">
         <div className="col login-wrapper">
-          <form onSubmit={this.handleOnLogin}>
+          <form onSubmit={arg.onSubmit}>
             <div className="row">
               <div className="login-title">
                 <h3>
@@ -63,10 +83,11 @@ class Login extends Component {
                   />
                 </div>
               </div>
+              {arg.profile}
             </div>
             <div className="row submit">
-              <button className="btn btn-key" type="submit">
-                <span>시작하기!</span>
+              <button className={"btn " + arg.btn} type="submit">
+                <span>{arg.text}</span>
               </button>
             </div>
           </form>
@@ -82,21 +103,15 @@ class Login extends Component {
 const LoginContainer = () => (
   <AuthConsumer>
     {({ state, actions }) => (
-      <Login initialized={state.initialized} login={actions.login} />
+      <Login
+        initialized={state.initialized}
+        verified={state.verified}
+        profile={state.profile}
+        login={actions.login}
+        verify={actions.verify}
+      />
     )}
   </AuthConsumer>
 );
 
 export default LoginContainer;
-
-// <div className="login-form">
-//             <form onSubmit={this.handleOnLogin}>
-//               <input
-//                 type="text"
-//                 value={username}
-//                 onChange={this.handleOnChange}
-//               />
-//               <button type="submit" />
-//             </form>
-//             <h1>{username}</h1>
-//             <h1>{initialized ? "V" : "N"}</h1>

@@ -5,67 +5,88 @@ import qwest from "qwest";
 const AuthContext = React.createContext();
 const { Provider, Consumer: AuthConsumer } = AuthContext;
 
+const STATUS = {
+  VERIFY: 3,
+  SUCCESS: 2,
+  FAIL: 1,
+  WAIT: 0
+};
+
 class AuthProvider extends Component {
-  state = { initialized: false, profile: undefined };
+  state = { initialized: false, verified: STATUS.WAIT, profile: undefined };
 
   actions = {
-    login: username => {
+    login: () => {
+      this.setState({ initialized: true, verified: STATUS.VERIFY });
+    },
+    verify: username => {
       const url = api.IS_GITHUB_ID_CHECKER;
-      console.log(url);
-      setTimeout(
-        () =>
-          this.setState({
-            initialized: true,
-            profile: {
-              login: "dexterastin",
-              id: 13868235,
-              node_id: "MDQ6VXNlcjEzODY4MjM1",
-              avatar_url:
-                "https://avatars2.githubusercontent.com/u/13868235?v=4",
-              gravatar_id: "",
-              url: "https://api.github.com/users/dexterastin",
-              html_url: "https://github.com/dexterastin",
-              followers_url:
-                "https://api.github.com/users/dexterastin/followers",
-              following_url:
-                "https://api.github.com/users/dexterastin/following{/other_user}",
-              gists_url:
-                "https://api.github.com/users/dexterastin/gists{/gist_id}",
-              starred_url:
-                "https://api.github.com/users/dexterastin/starred{/owner}{/repo}",
-              subscriptions_url:
-                "https://api.github.com/users/dexterastin/subscriptions",
-              organizations_url:
-                "https://api.github.com/users/dexterastin/orgs",
-              repos_url: "https://api.github.com/users/dexterastin/repos",
-              events_url:
-                "https://api.github.com/users/dexterastin/events{/privacy}",
-              received_events_url:
-                "https://api.github.com/users/dexterastin/received_events",
-              type: "User",
-              site_admin: false,
-              name: "Gihyeon Yang",
-              company: "@SullivanEducation",
-              blog:
-                "https://www.notion.so/dexterastin/R-sum-c7db919b7a774b49be8d9e8340849663",
-              location: "Korea",
-              email: null,
-              hireable: true,
-              bio:
-                "Undergraduate at Kookmin Univ CS.  Studying at the Embedded Robotics Society KOBOT.",
-              public_repos: 13,
-              public_gists: 3,
-              followers: 14,
-              following: 10,
-              created_at: "2015-08-19T10:59:26Z",
-              updated_at: "2018-11-20T12:18:02Z"
-            }
-          }),
-        1
-      );
+      console.log(url, username);
 
-      console.log(this.state.initialized);
-      return true;
+      this.setState({ verified: STATUS.SUCCESS });
+
+      this.setState({
+        profile: {
+          login: "dexterastin",
+          id: 13868235,
+          node_id: "MDQ6VXNlcjEzODY4MjM1",
+          avatar_url: "https://avatars2.githubusercontent.com/u/13868235?v=4",
+          gravatar_id: "",
+          url: "https://api.github.com/users/dexterastin",
+          html_url: "https://github.com/dexterastin",
+          followers_url: "https://api.github.com/users/dexterastin/followers",
+          following_url:
+            "https://api.github.com/users/dexterastin/following{/other_user}",
+          gists_url: "https://api.github.com/users/dexterastin/gists{/gist_id}",
+          starred_url:
+            "https://api.github.com/users/dexterastin/starred{/owner}{/repo}",
+          subscriptions_url:
+            "https://api.github.com/users/dexterastin/subscriptions",
+          organizations_url: "https://api.github.com/users/dexterastin/orgs",
+          repos_url: "https://api.github.com/users/dexterastin/repos",
+          events_url:
+            "https://api.github.com/users/dexterastin/events{/privacy}",
+          received_events_url:
+            "https://api.github.com/users/dexterastin/received_events",
+          type: "User",
+          site_admin: false,
+          name: "Gihyeon Yang",
+          company: "@SullivanEducation",
+          blog:
+            "https://www.notion.so/dexterastin/R-sum-c7db919b7a774b49be8d9e8340849663",
+          location: "Korea",
+          email: null,
+          hireable: true,
+          bio:
+            "Undergraduate at Kookmin Univ CS.  Studying at the Embedded Robotics Society KOBOT.",
+          public_repos: 13,
+          public_gists: 3,
+          followers: 14,
+          following: 10,
+          created_at: "2015-08-19T10:59:26Z",
+          updated_at: "2018-11-23T10:19:42Z"
+        }
+      });
+
+      // qwest
+      //   .post(url, {
+      //     userid: username,
+      //     async: true
+      //   })
+      //   .then(response => JSON.parse(response["response"]))
+      //   .then(response => {
+      //     console.log(response);
+      //     if (response["check"]) {
+      //       this.setState({
+      //         verified: 1,
+      //         profile: response
+      //       });
+      //     } else {
+      //       this.setState({
+      //         verified: 2
+      //       });
+      //     }
+      //   });
     },
 
     logout: () => {
@@ -89,6 +110,7 @@ function useProvider(WrappedComponent) {
           <WrappedComponent
             initialized={state.initialized}
             profile={state.profile}
+            verified={state.verified}
             login={actions.login}
             logout={actions.logout}
           />
@@ -98,4 +120,4 @@ function useProvider(WrappedComponent) {
   };
 }
 
-export { AuthProvider, AuthConsumer, useProvider };
+export { AuthProvider, AuthConsumer, useProvider, STATUS };
