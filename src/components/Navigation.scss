@@ -9,6 +9,10 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   }
 
+  a:focus {
+    color: #1e1e1e;
+  }
+
   position: fixed;
   top: 0;
   right: 0;
