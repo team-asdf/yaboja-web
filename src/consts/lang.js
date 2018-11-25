@@ -736,4 +736,8 @@ export const languages = [
   { id: 695, name: "Zsh", popular: "false" },
   { id: 696, name: "ZPL", popular: "false" },
   { id: 697, name: "Z++", popular: "false" }
-];
+].map(d => {
+  d["label"] = d["name"];
+  d["value"] = d["name"];
+  return d;
+});

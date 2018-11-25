@@ -431,39 +431,23 @@ class Setting extends Component {
                     </span>
                   </p>
                 </div>
+                <Select
+                  className="multiselect"
+                  styles={{
+                    option: (provided, state) => ({
+                      ...provided,
+                      color: "black"
+                    })
+                  }}
+                  filterOption={createFilter({
+                    ignoreCase: true
+                  })}
+                  // defaultValue={}
+                  isMulti
+                  placeholder="관심기술을 선택해주세요!"
+                  options={languages}
+                />
               </div>
-              <Select
-                styles={{
-                  option: (provided, state) => ({
-                    ...provided,
-                    color: "black"
-                  })
-                }}
-                filterOption={createFilter({
-                  ignoreCase: true
-                })}
-                // defaultValue={}
-                isMulti
-                placeholder="관심기술을 선택해주세요!"
-                options={languages.map(d => {
-                  d["label"] = d["name"];
-                  d["value"] = d["name"];
-                  return d;
-                })}
-              />
-              {/* <div className="input-login-group">
-                <div className="input-group">
-                  <label>관심기술</label>
-                  <input
-                    id="login-username"
-                    onChange={this.handleOnChange}
-                    type="text"
-                    placeholder="관심 기술"
-                    required=""
-                    className=""
-                  />
-                </div>
-              </div> */}
               <h1>kk</h1>
             </div>
             <div className="row submit">
@@ -480,3 +464,17 @@ class Setting extends Component {
 }
 
 export default Setting;
+
+//  {/* <div className="input-login-group">
+//                 <div className="input-group">
+//                   <label>관심기술</label>
+//                   <input
+//                     id="login-username"
+//                     onChange={this.handleOnChange}
+//                     type="text"
+//                     placeholder="관심 기술"
+//                     required=""
+//                     className=""
+//                   />
+//                 </div>
+//               </div> */}
