@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import InfiniteScroll from "react-infinite-scroller";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import qwest from "qwest";
 import { v1 } from "uuid";
 import Article from "./Article";
@@ -36,28 +39,34 @@ class ArticleList extends Component {
       return a;
     });
 
+    toast.success("🚀 다음에 또보자!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true
+    });
+
     this.setState({ archive: temp });
   }
 
   loadArticles(page) {
-    const { initialized, profile } = this.props;
+    const { initialized, profile, nextHref } = this.props;
 
-    var url = this.state.nextHref
-      ? this.state.nextHref
+    var url = !!nextHref
+      ? nextHref
       : api.getArticle(page, initialized ? profile["login"] : undefined);
 
+    // console.log(!!nextHref, page, url);
+
     qwest
-      .get(
-        url,
-        {
-          linked_partitioning: 1,
-          page_size: 10
-        },
-        { cache: false }
-      )
+      .get(url)
       .then(response => JSON.parse(response["response"]))
       .then(response => {
         var articles = this.state.articles;
+
+        // console.log(response);
 
         response.map(resp => {
           resp["uuid"] = v1();
@@ -104,18 +113,31 @@ class ArticleList extends Component {
     );
 
     return (
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={this.loadArticles.bind(this)}
-        hasMore={this.state.hasMoreItems}
-        loader={loader}
-      >
-        <div className="site-wrapper" role="main">
-          <div className="container">
-            <div className="post-list">{items}</div>
+      <div>
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={this.loadArticles.bind(this)}
+          hasMore={this.state.hasMoreItems}
+          loader={loader}
+        >
+          <div className="site-wrapper" role="main">
+            <div className="container">
+              <div className="post-list">{items}</div>
+            </div>
           </div>
-        </div>
-      </InfiniteScroll>
+        </InfiniteScroll>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable={false}
+          pauseOnHover={false}
+        />
+      </div>
     );
   }
 }

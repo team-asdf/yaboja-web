@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Select, { createFilter } from "react-select";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { AuthConsumer } from "../contexts/AuthContext";
-
 import { languages } from "../consts/lang";
 
 class Setting extends Component {
@@ -34,13 +35,22 @@ class Setting extends Component {
   }
 
   handleChange(newValue, actionMeta) {
-    this.setState({ select: newValue });
+    this.setState({ selected: newValue });
   }
 
   handleOnUpdateKeyword(e) {
-    let selected = this.state.select;
+    let selected = this.state.selected;
     e.preventDefault();
+    console.log(1);
     this.props.updateKeywod(selected.map(t => t["name"]).join(","));
+    toast.success("😎 저장되었습니다!", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true
+    });
   }
 
   render() {
@@ -99,6 +109,17 @@ class Setting extends Component {
           </form>
         </div>
         <div className="image-view" />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable={false}
+          pauseOnHover={false}
+        />
       </section>
     );
   }
