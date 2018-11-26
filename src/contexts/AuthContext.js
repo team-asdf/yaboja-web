@@ -17,8 +17,9 @@ class AuthProvider extends Component {
 
   actions = {
     updateKeywod: keyword => {
-      qwest.post("http://angelbeats.tk:3000/api/v1/signup/gwons", {
-        userid: "gwon",
+      const username = this.state.profile["login"];
+      qwest.post("http://angelbeats.tk:3000/api/v1/signup/" + username, {
+        userid: username,
         keyword: keyword
       });
 
@@ -31,7 +32,7 @@ class AuthProvider extends Component {
     },
     login: username => {
       qwest
-        .get("http://angelbeats.tk:3000/api/v1/contents/keyword/gwons")
+        .get("http://angelbeats.tk:3000/api/v1/contents/keyword/" + username)
         .then(response => JSON.parse(response["response"]))
         .then(response => {
           let profile = this.state.profile;
