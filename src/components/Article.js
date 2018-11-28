@@ -20,11 +20,10 @@ export default ({ initialized, article, keyword, onClick, archiveClick }) => {
         ""
       )}
       <div className="desc">
-        <p className="pf">
-          <span className="ic-left">
-            #{article["source"]} / {article["createdAt"]}
-          </span>
-        </p>
+        <ul className="post-tag">
+          <li>#{article["source"]}</li>
+          <li>{article["createdAt"]}</li>
+        </ul>
       </div>
       <a
         onClick={onClick}
