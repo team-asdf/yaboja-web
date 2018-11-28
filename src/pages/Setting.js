@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Select, { createFilter } from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import qwest from "qwest";
 
 import { AuthConsumer } from "../contexts/AuthContext";
-import { languages } from "../consts/lang";
+import { api } from "../consts/apis";
 
 class Setting extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class Setting extends Component {
     this.state = {
       init: false,
       selected: [],
-      findKey: ""
+      findKey: "",
+      languages: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,14 +26,27 @@ class Setting extends Component {
       .split(",")
       .map(k => k.toLowerCase());
 
-    const selected = languages.filter(lang => {
-      return userkey.indexOf(lang["name"].toLowerCase()) !== -1;
-    });
+    qwest
+      .get(api.LANGUAGES)
+      .then(response => JSON.parse(response["response"]))
+      .then(response =>
+        response.map(d => {
+          d["label"] = d["name"];
+          d["value"] = d["name"];
+          return d;
+        })
+      )
+      .then(response => {
+        const selected = response.filter(lang => {
+          return userkey.indexOf(lang["name"].toLowerCase()) !== -1;
+        });
 
-    this.setState({
-      selected: selected,
-      init: true
-    });
+        this.setState({
+          languages: response,
+          selected: selected,
+          init: true
+        });
+      });
   }
 
   handleChange(newValue, actionMeta) {
@@ -54,7 +69,7 @@ class Setting extends Component {
   }
 
   render() {
-    const { init, selected } = this.state;
+    const { init, selected, languages } = this.state;
 
     return (
       <section id="login">
