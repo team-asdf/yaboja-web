@@ -20,7 +20,7 @@ const NavigationBar = ({ initialized, profile, logout }) => (
       <nav className="site-nav">
         {initialized ? (
           <div>
-            <Link to={PATH.SETTING}>또보자</Link>
+            <Link to={PATH.ARCHIVE}>또보자</Link>
             <Link to={PATH.SETTING}>설정</Link>
             <a
               href={PATH.HOME}

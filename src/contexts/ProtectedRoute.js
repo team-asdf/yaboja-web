@@ -21,17 +21,19 @@ const ProtectedRoute = ({
   />
 );
 
-const ProtectedRouteContainer = ({ component, init = true, ...rest }) => (
-  <AuthConsumer>
-    {({ state, actions }) => (
-      <ProtectedRoute
-        initialized={state.initialized}
-        component={component}
-        init={init}
-        rest={rest}
-      />
-    )}
-  </AuthConsumer>
-);
+const ProtectedRouteContainer = ({ component, init = true, ...rest }) => {
+  return (
+    <AuthConsumer>
+      {({ state, actions }) => (
+        <ProtectedRoute
+          initialized={state.initialized}
+          component={component}
+          init={init}
+          rest={rest}
+        />
+      )}
+    </AuthConsumer>
+  );
+};
 
 export default ProtectedRouteContainer;

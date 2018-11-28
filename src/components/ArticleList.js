@@ -58,12 +58,20 @@ class ArticleList extends Component {
   }
 
   loadArticles(page) {
-    const { initialized, profile, archive } = this.props;
+    const { initialized, profile, archive, isArchive } = this.props;
     const { nextHref } = this.state;
+
+    console.log(isArchive);
 
     var url = !!nextHref
       ? nextHref
-      : api.getArticle(page - 1, initialized ? profile["login"] : undefined);
+      : api.getArticle(
+          page - 1,
+          initialized ? profile["login"] : undefined,
+          isArchive
+        );
+
+    console.log(url);
 
     // console.log(url);
     qwest
@@ -92,14 +100,15 @@ class ArticleList extends Component {
           return resp;
         });
 
-        if (response.length === 0) {
+        if (response.length === 0 || isArchive) {
           this.setState({ hasMoreItems: false });
         } else {
           this.setState({
             articles,
             nextHref: api.getArticle(
-              page,
-              initialized ? profile["login"] : undefined
+              page - 1,
+              initialized ? profile["login"] : undefined,
+              isArchive
             )
           });
         }
@@ -159,16 +168,20 @@ class ArticleList extends Component {
   }
 }
 
-const ArticleListContainer = () => (
+const ArticleListContainer = ({ isArchive = false }) => (
   <AuthConsumer>
-    {({ state, actions }) => (
-      <ArticleList
-        initialized={state.initialized}
-        archive={state.archive}
-        profile={state.profile}
-        save={actions.save}
-      />
-    )}
+    {({ state, actions }) => {
+      console.log(isArchive);
+      return (
+        <ArticleList
+          initialized={state.initialized}
+          archive={state.archive}
+          profile={state.profile}
+          isArchive={isArchive}
+          save={actions.save}
+        />
+      );
+    }}
   </AuthConsumer>
 );
 

@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 
-import { Home, Setting, Login, About } from "./pages";
+import { Home, Setting, Login, About, Archive } from "./pages";
 
 import { NavigationBar, Footer } from "./components";
 import ProtectedRoute from "./contexts/ProtectedRoute";
@@ -19,7 +19,11 @@ const App = () => (
         <NavigationBar />
         <Switch>
           <ProtectedRoute path={PATH.SETTING} component={Setting} />
-
+          <ProtectedRoute
+            path={PATH.ARCHIVE}
+            component={Archive}
+            isArchive={true}
+          />
           {/* <Route path={PATH.SETTING} component={Setting} /> */}
           <Route path={PATH.ABOUT} component={About} />
           <Route path={PATH.LOGIN} init={false} component={Login} />
