@@ -13,9 +13,50 @@ const STATUS = {
 };
 
 class AuthProvider extends Component {
-  state = { initialized: false, verified: STATUS.WAIT, profile: undefined };
+  state = {
+    initialized: false,
+    verified: STATUS.WAIT,
+    profile: undefined,
+    archive: []
+  };
 
   actions = {
+    save: content => {
+      const { profile } = this.state;
+      // console.log("LOG", content);
+
+      const url =
+        "http://angelbeats.tk:3000/api/v1/updater" +
+        (content["archive"] ? "/" + profile["login"] : "") +
+        ("/" + String(content["idx"]));
+
+      console.log(url);
+
+      qwest
+        .post(url, {
+          idx: content["idx"],
+          userid: profile["login"]
+        })
+        .then(response => JSON.parse(response["response"]))
+        .then(response => {
+          if (response["check"]) {
+            if (!content["archive"]) {
+              // 저장인 상태
+              this.setState(({ archive }) => ({
+                archive: archive.filter(a => {
+                  return a["idx"] !== content["idx"];
+                })
+              }));
+            } else {
+              this.setState(({ archive }) => ({
+                archive: [...archive, content]
+              }));
+              // 삭제해야하는 상태
+            }
+            // console.log("archive: ", this.state.archive);
+          }
+        });
+    },
     updateKeywod: keyword => {
       const username = this.state.profile["login"];
       qwest.post("http://angelbeats.tk:3000/api/v1/signup/" + username, {
@@ -60,6 +101,17 @@ class AuthProvider extends Component {
           //   keyword: ""
           // });
 
+          qwest
+            .get(
+              "http://angelbeats.tk:3000/api/v1/contents/archives/" +
+                String(username)
+            )
+            .then(response => JSON.parse(response["response"]))
+            .then(response => {
+              this.setState({ archive: response });
+              // console.log(this.state.archive);
+            });
+
           if (response["check"]) {
             this.setState({
               verified: STATUS.SUCCESS,
@@ -95,7 +147,9 @@ function useProvider(WrappedComponent) {
             initialized={state.initialized}
             profile={state.profile}
             verified={state.verified}
+            archive={state.archive}
             select={actions.select}
+            save={actions.save}
             login={actions.login}
             logout={actions.logout}
             updateKeywod={actions.updateKeywod}

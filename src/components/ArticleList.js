@@ -25,52 +25,69 @@ class ArticleList extends Component {
   }
 
   clickArticle(e) {
-    console.log(e);
+    // console.log(e);
     // TODO: count view
   }
 
   archiveClick(idx) {
     // TODO: update archive
     var temp = this.state.articles;
+    var message = "잘못된 요청입니다.";
+
     temp = temp.map(a => {
       if (a["idx"] === idx) {
+        this.props.save(a);
+        message = !a["archive"] ? "🚀 다음에 또보자!" : "삭제 완료";
         a["archive"] = !a["archive"];
+
+        var toastObj = a["archive"] ? toast.success : toast.error;
+
+        toastObj(message, {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true
+        });
       }
       return a;
-    });
-
-    toast.success("🚀 다음에 또보자!", {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true
     });
 
     this.setState({ archive: temp });
   }
 
   loadArticles(page) {
-    const { initialized, profile, nextHref } = this.props;
+    const { initialized, profile, archive } = this.props;
+    const { nextHref } = this.state;
 
     var url = !!nextHref
       ? nextHref
-      : api.getArticle(page, initialized ? profile["login"] : undefined);
+      : api.getArticle(page - 1, initialized ? profile["login"] : undefined);
 
-    // console.log(!!nextHref, page, url);
-
+    // console.log(url);
     qwest
       .get(url)
       .then(response => JSON.parse(response["response"]))
       .then(response => {
         var articles = this.state.articles;
 
-        // console.log(response);
+        response.map((resp, index) => {
+          // console.log(resp);
 
-        response.map(resp => {
           resp["uuid"] = v1();
-          resp["archive"] = false;
+          // console.log(initialized, resp, archive);
+
+          // console.log(
+          //   archive.findIndex(a => {
+          //     return a["idx"] === resp["idx"];
+          //   }) !== -1
+          // );
+
+          resp["archive"] =
+            archive.findIndex(a => {
+              return a["idx"] === resp["idx"];
+            }) !== -1;
           articles.push(resp);
           return resp;
         });
@@ -94,7 +111,7 @@ class ArticleList extends Component {
 
     const loader = (
       <div key={v1()} className="loading-bar">
-        Loading...
+        글 불러오는 중...
       </div>
     );
 
@@ -115,7 +132,7 @@ class ArticleList extends Component {
     return (
       <div>
         <InfiniteScroll
-          pageStart={0}
+          pageStart={1}
           loadMore={this.loadArticles.bind(this)}
           hasMore={this.state.hasMoreItems}
           loader={loader}
@@ -144,8 +161,13 @@ class ArticleList extends Component {
 
 const ArticleListContainer = () => (
   <AuthConsumer>
-    {({ state }) => (
-      <ArticleList initialized={state.initialized} profile={state.profile} />
+    {({ state, actions }) => (
+      <ArticleList
+        initialized={state.initialized}
+        archive={state.archive}
+        profile={state.profile}
+        save={actions.save}
+      />
     )}
   </AuthConsumer>
 );

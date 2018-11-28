@@ -41,7 +41,7 @@ class Setting extends Component {
   handleOnUpdateKeyword(e) {
     let selected = this.state.selected;
     e.preventDefault();
-    console.log(1);
+    // console.log(1);
     this.props.updateKeywod(selected.map(t => t["name"]).join(","));
     toast.success("😎 저장되었습니다!", {
       position: "bottom-right",
