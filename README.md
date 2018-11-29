@@ -13,7 +13,7 @@
 
 야보자는 사용자의 깃허브 프로필을 분석하여, 사용자의 관심사를 파악하고 기술문서를 추천해주는 서비스입니다. 국민대학교 오픈소스 소프트웨어의 [team-asdf](https://github.com/team-asdf)팀이 개발했습니다.
 
-
+## Usage
 ### `npm start`
 
 Runs the app in the development mode.<br>
