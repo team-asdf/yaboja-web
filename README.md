@@ -1,8 +1,18 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="middle">
+  <img src="./readme/download.svg" height="100" >
+</p>
 
-## Available Scripts
+<p align="center">
+	<img src="https://img.shields.io/badge/오픈소스소프트웨어-1분반-blue.svg">
+</p>
 
-In the project directory, you can run:
+# 똑똑하게 구독하세요! 기술문서 구독은 야보자!
+## Introduction
+#### 🚀 똑똑하게 구독하세요! 기술문서 구독은 야보자!
+
+
+야보자는 사용자의 깃허브 프로필을 분석하여, 사용자의 관심사를 파악하고 기술문서를 추천해주는 서비스입니다. 국민대학교 오픈소스 소프트웨어의 [team-asdf](https://github.com/team-asdf)팀이 개발했습니다.
+
 
 ### `npm start`
 
@@ -17,31 +27,6 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## LICENSE
 MIT License
