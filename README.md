@@ -1,5 +1,5 @@
 <p align="middle">
-  <img src="https://raw.githubusercontent.com/team-asdf/yaboja-web/master/readme/download.svg" height="100" >
+ <img src="./readme/download.svg" height="100" >
 </p>
 
 <p align="center">
