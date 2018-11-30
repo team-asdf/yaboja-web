@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://team-asdf.github.io/yaboja-web/",
   "dependencies": {
+    "classnames": "^2.2.6",
     "gh-pages": "^2.0.1",
     "node-sass": "^4.10.0",
     "qwest": "^4.5.0",

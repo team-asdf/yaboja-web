@@ -13,7 +13,6 @@ class Archive extends Component {
             <blockquote>어제 읽은 글을 오늘 까먹는 마법 같은 곳</blockquote>
           </header>
         </div>
-        <hr />
         <ArticleList isArchive={true} />
       </div>
     );
