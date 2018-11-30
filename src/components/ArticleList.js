@@ -24,13 +24,18 @@ class ArticleList extends Component {
     this.archiveClick = this.archiveClick.bind(this);
   }
 
-  clickArticle(e) {
-    // console.log(e);
-    // TODO: count view
+  clickArticle(idx) {
+    this.setState(({ articles }) => ({
+      articles: articles.map(a => {
+        if (a["idx"] === idx) {
+          a["read"] = true;
+        }
+        return a;
+      })
+    }));
   }
 
   archiveClick(idx) {
-    // TODO: update archive
     var temp = this.state.articles;
     var message = "잘못된 요청입니다.";
 
@@ -76,6 +81,7 @@ class ArticleList extends Component {
         var articles = this.state.articles;
 
         response.map((resp, index) => {
+          resp["read"] = false;
           resp["uuid"] = v1();
           resp["archive"] =
             archive.findIndex(a => {
@@ -156,7 +162,7 @@ class ArticleList extends Component {
 const ArticleListContainer = ({ isArchive = false }) => (
   <AuthConsumer>
     {({ state, actions }) => {
-      console.log(isArchive);
+      // console.log(isArchive);
       return (
         <ArticleList
           initialized={state.initialized}

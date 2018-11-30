@@ -3,8 +3,9 @@ import React from "react";
 import "./Article.scss";
 
 export default ({ initialized, article, keyword, onClick, archiveClick }) => {
+  console.log(article["read"]);
   return (
-    <div className="list-module">
+    <div className={"list-module"}>
       {initialized ? (
         <button
           onClick={() => archiveClick(article["idx"])}
@@ -19,37 +20,40 @@ export default ({ initialized, article, keyword, onClick, archiveClick }) => {
       ) : (
         ""
       )}
-      <div className="desc">
+      <div className={!article["archive"] && article["read"] ? "read" : ""}>
+        <div className="desc">
+          <ul className="post-tag">
+            <li>#{article["source"]}</li>
+            <li>{article["createdAt"]}</li>
+          </ul>
+        </div>
+
+        <a
+          onClick={() => onClick(article["idx"])}
+          href={article["url"]}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 className="post-link">{article["title"]}</h2>
+          <p className="post-description">{article["content"]}</p>
+        </a>
         <ul className="post-tag">
-          <li>#{article["source"]}</li>
-          <li>{article["createdAt"]}</li>
+          {article["keyword"].split(",").map(k => {
+            const highlight =
+              keyword
+                .split(",")
+                .map(k => k.toLowerCase())
+                .indexOf(k.toLowerCase()) !== -1
+                ? "tag-hightlight"
+                : "";
+            return (
+              <li key={String(article["uuid"] + k)} className={highlight}>
+                {"# " + k.replace(" ", "_")}
+              </li>
+            );
+          })}
         </ul>
       </div>
-      <a
-        onClick={onClick}
-        href={article["url"]}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <h2 className="post-link">{article["title"]}</h2>
-        <p className="post-description">{article["content"]}</p>
-      </a>
-      <ul className="post-tag">
-        {article["keyword"].split(",").map(k => {
-          const highlight =
-            keyword
-              .split(",")
-              .map(k => k.toLowerCase())
-              .indexOf(k.toLowerCase()) !== -1
-              ? "tag-hightlight"
-              : "";
-          return (
-            <li key={String(article["uuid"] + k)} className={highlight}>
-              {"# " + k.replace(" ", "_")}
-            </li>
-          );
-        })}
-      </ul>
     </div>
   );
 };

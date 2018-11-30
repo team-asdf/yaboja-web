@@ -30,7 +30,7 @@ class AuthProvider extends Component {
         (content["archive"] ? "/" + profile["login"] : "") +
         ("/" + String(content["idx"]));
 
-      console.log(url);
+      // console.log(url);
 
       qwest
         .post(url, {
