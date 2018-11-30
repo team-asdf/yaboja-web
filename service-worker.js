@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/yaboja-web/precache-manifest.0a5ddaa980d68f86cab105d4c8861d1b.js"
+  "/yaboja-web/precache-manifest.45b71adf35a88241998ed3ae33be02fb.js"
 );
 
 workbox.clientsClaim();

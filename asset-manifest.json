@@ -1,7 +1,7 @@
 {
   "main.css": "/yaboja-web/static/css/main.d587b4ca.chunk.css",
-  "main.js": "/yaboja-web/static/js/main.1faf3c1e.chunk.js",
-  "main.js.map": "/yaboja-web/static/js/main.1faf3c1e.chunk.js.map",
+  "main.js": "/yaboja-web/static/js/main.1f5a6767.chunk.js",
+  "main.js.map": "/yaboja-web/static/js/main.1f5a6767.chunk.js.map",
   "static/css/1.28e79080.chunk.css": "/yaboja-web/static/css/1.28e79080.chunk.css",
   "static/js/1.4e0032bf.chunk.js": "/yaboja-web/static/js/1.4e0032bf.chunk.js",
   "static/js/1.4e0032bf.chunk.js.map": "/yaboja-web/static/js/1.4e0032bf.chunk.js.map",
@@ -12,6 +12,6 @@
   "static/css/main.d587b4ca.chunk.css.map": "/yaboja-web/static/css/main.d587b4ca.chunk.css.map",
   "static/css/1.28e79080.chunk.css.map": "/yaboja-web/static/css/1.28e79080.chunk.css.map",
   "index.html": "/yaboja-web/index.html",
-  "precache-manifest.0a5ddaa980d68f86cab105d4c8861d1b.js": "/yaboja-web/precache-manifest.0a5ddaa980d68f86cab105d4c8861d1b.js",
+  "precache-manifest.45b71adf35a88241998ed3ae33be02fb.js": "/yaboja-web/precache-manifest.45b71adf35a88241998ed3ae33be02fb.js",
   "service-worker.js": "/yaboja-web/service-worker.js"
 }

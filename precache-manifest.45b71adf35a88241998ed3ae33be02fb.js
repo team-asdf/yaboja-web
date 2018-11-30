@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/yaboja-web/static/media/bg-01.5abce45f.jpg"
   },
   {
-    "revision": "1faf3c1ecd93230ba3fc",
+    "revision": "1f5a6767dbaf69525c43",
     "url": "/yaboja-web/static/css/main.d587b4ca.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = [
     "url": "/yaboja-web/static/js/runtime~main.a48809f3.js"
   },
   {
-    "revision": "1faf3c1ecd93230ba3fc",
-    "url": "/yaboja-web/static/js/main.1faf3c1e.chunk.js"
+    "revision": "1f5a6767dbaf69525c43",
+    "url": "/yaboja-web/static/js/main.1f5a6767.chunk.js"
   },
   {
     "revision": "e914bc02e568743154a6c1ac699ffd39",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/yaboja-web/static/css/1.28e79080.chunk.css"
   },
   {
-    "revision": "321b5af2fcb0ed8cd3eab491474156e0",
+    "revision": "e02b56f9e24494784a7ffbdfd05a9b75",
     "url": "/yaboja-web/index.html"
   }
 ];
