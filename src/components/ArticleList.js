@@ -61,8 +61,6 @@ class ArticleList extends Component {
     const { initialized, profile, archive, isArchive } = this.props;
     const { nextHref } = this.state;
 
-    console.log(isArchive);
-
     var url = !!nextHref
       ? nextHref
       : api.getArticle(
@@ -71,9 +69,6 @@ class ArticleList extends Component {
           isArchive
         );
 
-    console.log(url);
-
-    // console.log(url);
     qwest
       .get(url)
       .then(response => JSON.parse(response["response"]))
@@ -81,17 +76,7 @@ class ArticleList extends Component {
         var articles = this.state.articles;
 
         response.map((resp, index) => {
-          // console.log(resp);
-
           resp["uuid"] = v1();
-          // console.log(initialized, resp, archive);
-
-          // console.log(
-          //   archive.findIndex(a => {
-          //     return a["idx"] === resp["idx"];
-          //   }) !== -1
-          // );
-
           resp["archive"] =
             archive.findIndex(a => {
               return a["idx"] === resp["idx"];
@@ -106,7 +91,7 @@ class ArticleList extends Component {
           this.setState({
             articles,
             nextHref: api.getArticle(
-              page - 1,
+              page,
               initialized ? profile["login"] : undefined,
               isArchive
             )
