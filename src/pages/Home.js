@@ -9,7 +9,9 @@ class Home extends Component {
     return (
       <div>
         <Banner />
-        <div className="blank">Last Update : {date.toLocaleString()}</div>
+        <div className="blank container">
+          Last Update : {date.toLocaleString()}
+        </div>
         <ArticleList />
       </div>
     );
