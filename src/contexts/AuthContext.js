@@ -81,9 +81,13 @@ class AuthProvider extends Component {
 
                 if (response[0]["keyword"] === "") {
                   response[0]["keyword"] = response[0]["extract_language"];
+                  qwest.post(api.SIGNUP(username), {
+                    userid: username,
+                    keyword: response[0]["keyword"]
+                  });
                 }
-                profile["keyword"] = response;
 
+                profile["keyword"] = response;
                 this.setState({ initialized: true, profile: profile });
               });
           }

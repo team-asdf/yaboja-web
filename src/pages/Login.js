@@ -50,7 +50,6 @@ class Login extends Component {
   countUp() {
     this.setState(({ intervalHandle }) => ({
       intervalHandle: setInterval(() => {
-        console.log(1);
         this.setState(({ time }) => ({ time: time + 1 }));
       }, 10)
     }));
