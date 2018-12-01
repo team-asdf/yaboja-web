@@ -3,7 +3,6 @@ import React from "react";
 import "./Article.scss";
 
 export default ({ initialized, article, keyword, onClick, archiveClick }) => {
-  console.log(article["read"]);
   return (
     <div className={"list-module"}>
       {initialized ? (

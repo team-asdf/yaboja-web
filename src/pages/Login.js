@@ -8,13 +8,21 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: ""
+      username: "",
+      preloader: false,
+      time: 0,
+      intervalHandle: undefined
     };
 
     this.handleOnVerify = this.handleOnVerify.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnLogin = this.handleOnLogin.bind(this);
     this.handleOnSelect = this.handleOnSelect.bind(this);
+    this.countUp = this.countUp.bind(this);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalHandle);
   }
 
   handleOnChange(e) {
@@ -30,6 +38,8 @@ class Login extends Component {
   handleOnLogin(e) {
     e.preventDefault();
     this.props.login(this.state.username);
+    this.setState({ preloader: true });
+    this.countUp();
   }
 
   handleOnSelect(e) {
@@ -37,8 +47,18 @@ class Login extends Component {
     this.props.select();
   }
 
+  countUp() {
+    this.setState(({ intervalHandle }) => ({
+      intervalHandle: setInterval(() => {
+        console.log(1);
+        this.setState(({ time }) => ({ time: time + 1 }));
+      }, 10)
+    }));
+  }
+
   render() {
     const { initialized, verified } = this.props;
+    const { preloader, time } = this.state;
 
     let body = "";
     let arg =
@@ -110,6 +130,15 @@ class Login extends Component {
           </form>
         </div>
         <div className="image-view" />
+        {preloader ? (
+          <div className="preloader">
+            <div className="spinner" />
+            <h1>분석중입니다.</h1>
+            <h2>{time / 100}초</h2>
+          </div>
+        ) : (
+          ""
+        )}
       </section>
     );
 

@@ -30,5 +30,6 @@ export const api = {
   SIGNUP: username => process.env.REACT_APP_API_HOST + "/signup/" + username,
   USER_KEYWORD: username =>
     process.env.REACT_APP_API_HOST + "/contents/keyword/" + username,
-  OPENSOURCE: process.env.REACT_APP_API_HOST + "/opensources"
+  OPENSOURCE: process.env.REACT_APP_API_HOST + "/opensources",
+  ANALYSIS: process.env.REACT_APP_API_HOST + "/signup/newuser"
 };

@@ -22,6 +22,7 @@
     transform: rotate(270deg);
   }
 }
+
 .path {
   stroke-dasharray: 187;
   stroke-dashoffset: 0;
@@ -62,6 +63,16 @@
     transform: rotate(450deg);
   }
 }
+
+.preloader {
+  background: rgba($color: #fff, $alpha: 0.8);
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 3;
+}
+
 html {
   line-height: 1.3;
   -ms-text-size-adjust: 100%;
