@@ -23,10 +23,15 @@ yarn or npm install
 
 ### Start
 #### npm
-`npm run start`
+
+```
+npm run start
+```
 
 #### yarn
-`yarn start`
+```
+yarn start
+```
 
 
 ## LICENSE
