@@ -68,7 +68,7 @@ class ArticleList extends Component {
 
     var url = !!nextHref
       ? nextHref
-      : api.getArticle(
+      : api.GET_ARTICLE(
           page - 1,
           initialized ? profile["login"] : undefined,
           isArchive
@@ -96,7 +96,7 @@ class ArticleList extends Component {
         } else {
           this.setState({
             articles,
-            nextHref: api.getArticle(
+            nextHref: api.GET_ARTICLE(
               page,
               initialized ? profile["login"] : undefined,
               isArchive

@@ -4,10 +4,12 @@ import "./Home.scss";
 
 class Home extends Component {
   render() {
+    var date = new Date();
+    date.setMinutes(date.getMinutes() > 30 ? 30 : 0);
     return (
       <div>
         <Banner />
-        <div className="blank">blank</div>
+        <div className="blank">Last Update : {date.toLocaleString()}</div>
         <ArticleList />
       </div>
     );

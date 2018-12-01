@@ -23,14 +23,8 @@ class AuthProvider extends Component {
   actions = {
     save: content => {
       const { profile } = this.state;
-      // console.log("LOG", content);
 
-      const url =
-        "http://angelbeats.tk:3000/api/v1/updater" +
-        (content["archive"] ? "/" + profile["login"] : "") +
-        ("/" + String(content["idx"]));
-
-      // console.log(url);
+      const url = api.ARCHIVE_UPDATE(content, profile);
 
       qwest
         .post(url, {
@@ -59,7 +53,7 @@ class AuthProvider extends Component {
     },
     updateKeywod: keyword => {
       const username = this.state.profile["login"];
-      qwest.post("http://angelbeats.tk:3000/api/v1/signup/" + username, {
+      qwest.post(api.SIGNUP(username), {
         userid: username,
         keyword: keyword
       });
@@ -73,7 +67,7 @@ class AuthProvider extends Component {
     },
     login: username => {
       qwest
-        .get("http://angelbeats.tk:3000/api/v1/contents/keyword/" + username)
+        .get(api.USER_KEYWORD(username))
         .then(response => JSON.parse(response["response"]))
         .then(response => {
           let profile = this.state.profile;
@@ -95,17 +89,8 @@ class AuthProvider extends Component {
         })
         .then(response => JSON.parse(response["response"]))
         .then(response => {
-          // qwest.post("http://angelbeats.tk:3000/api/v1/signup", {
-          //   userid: username,
-          //   extract_language: "",
-          //   keyword: ""
-          // });
-
           qwest
-            .get(
-              "http://angelbeats.tk:3000/api/v1/contents/archives/" +
-                String(username)
-            )
+            .get(api.GET_ARCHIVE_ARTICLE(username))
             .then(response => JSON.parse(response["response"]))
             .then(response => {
               this.setState({ archive: response });
