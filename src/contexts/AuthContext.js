@@ -66,38 +66,25 @@ class AuthProvider extends Component {
       this.setState({ verified: STATUS.VERIFY });
     },
     login: username => {
-      console.log("login");
       qwest
         .post(api.ANALYSIS, {
           userid: username
         })
-        .then(response => {
-          console.log(response);
-          return JSON.parse(response["response"]);
-        })
+        .then(response => JSON.parse(response["response"]))
         .then(response => {
           if (response["check"]) {
             qwest
               .get(api.USER_KEYWORD(username))
+              .then(response => JSON.parse(response["response"]))
               .then(response => {
-                console.log(response);
-                return JSON.parse(response["response"]);
-              })
-              .then(response => {
-                console.log("userkey", response.length === 0);
-
                 let profile = this.state.profile;
 
-                if (response.length !== 0) {
-                  if (response[0]["keyword"] === "") {
-                    response[0]["keyword"] = response[0]["extract_language"];
-                    qwest.post(api.SIGNUP(username), {
-                      userid: username,
-                      keyword: response[0]["keyword"]
-                    });
-                  }
-                } else {
-                  response[0] = { keyword: "", extract_language: "" };
+                if (response[0]["keyword"] === "") {
+                  response[0]["keyword"] = response[0]["extract_language"];
+                  qwest.post(api.SIGNUP(username), {
+                    userid: username,
+                    keyword: response[0]["keyword"]
+                  });
                 }
 
                 profile["keyword"] = response;
